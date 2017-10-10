@@ -377,6 +377,21 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    let working = Array.from(array);
+
+    const getRandomNumber = (max) => {
+      return Math.random() * max;
+    };
+
+    let results = [];
+
+    for(let i = 0; i < working.length; i++) {
+      results.push(working.splice(getRandomNumber(working.length), 1)[0]);
+    }
+    results.push(working.pop());
+
+    return results;
+  
   };
 
 
