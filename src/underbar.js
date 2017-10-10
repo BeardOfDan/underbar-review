@@ -283,6 +283,16 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    for (let i = 1; i < arguments.length; i++) {
+      let addlObj = arguments[i];
+      for (let key in addlObj) {
+        if (obj[key] === undefined) {
+          obj[key] = addlObj[key];
+        }
+      }
+    }
+
+    return obj;
   };
 
 
