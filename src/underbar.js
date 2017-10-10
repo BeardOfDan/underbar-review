@@ -104,6 +104,27 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    iterator = iterator || _.identity;
+
+    let result = [];
+    let working = [];
+    let indexes = [];
+
+    _.each(array, function(value, index, collection) {
+      working.push(iterator(value, index, collection));
+    });
+
+    _.each(working, function(value, index, collection) {
+      if (_.indexOf(working.slice(0, index), working[index]) < 0) {
+        indexes.push(index);
+      }
+    });
+
+    _.each(indexes, function(value, index, collection) {
+      result.push(array[collection[index]]);
+    });
+
+    return result;
   };
 
 
